@@ -67,22 +67,7 @@ window.onload = function()
 
 		return choose;
 	}
-	/*function judge_text()
-	{
-		var result_text = random_choose();
-		if(result_text == paper_src)
-		{
-			result.innerHTML = "Tie";
-		}
-		else if(result_text == scissors_src)
-		{
-			result.innerHTML = "Win";
-		}
-		else if(result_text == stone_src)
-		{
-			result.innerHTML = "Lost";
-		}
-	}*/
+	
 	paper.onclick = function()
 	{
 		my_result.src = paper_src;
