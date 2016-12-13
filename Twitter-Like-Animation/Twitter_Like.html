@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>Twitter-Like-Web-Heart-Animation</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+<style>
+	body,div{ 
+		margin: 0;
+		padding:0;
+	}
+	#like-btn{
+		margin-top: 200px;
+		width:30px;
+		height: 28px;
+		position: relative;
+		display: inline-block;
+		cursor: pointer;
+		overflow: hidden;
+		left:48%;
+	}
+	#like-animation{
+		background: url(img/web_heart_animation.png) no-repeat 0 0;
+		width: 100px;
+		height: 100px;
+		top:-37px;
+		left: -36px;
+		position: absolute;
+	}
+</style>
+<script>
+	window.onload = function(){
+		var oBtn = document.getElementById('like-btn');
+		var oLike = document.getElementById('like-animation');
+		var start = 0;
+		var end = -2800;
+		var speed = -100;
+		var timer = null;
+		var flag = false;
+
+		oBtn.onclick = function(){
+			likeAnimation();
+		}
+		function likeAnimation(){
+			if(!flag){
+				timer = setInterval(function(){
+					if(end<start){
+						flag =true;
+						start +=speed;
+						oLike.style.backgroundPosition = start+"px";
+						oBtn.style.overflow = "visible";
+
+					}
+					else{
+						clearInterval(timer);
+						oBtn.style.overflow = "hidden";
+						start = 0;
+					}
+				},25);
+			}
+			else{
+				oLike.style.backgroundPosition = start+"px";
+				flag = false;
+			}
+		}
+	}
+</script>
+</head>
+<body>
+    <div id="like-btn">
+    	<div id="like-animation"></div>
+    </div>
+</body>
+</html>
