@@ -3,6 +3,6 @@
 
 ###Twitter-Like-Animation
 
-	利用background-position属性 和 JavaScript 实现Twitter 点赞效果	
+	Twitter 点赞效果	
 
 
