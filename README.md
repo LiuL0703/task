@@ -5,4 +5,6 @@
 
 	Twitter 点赞效果	
 
-
+###A Simple Chrome Extension
+	
+	一个简单的Chrome天气查询插件
