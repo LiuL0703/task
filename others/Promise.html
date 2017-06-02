@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Promise</title>
+</head>
+<body>
+
+<script>
+	function imgLoad(url){
+		return new Promise(function(resolve,reject){
+			// 创建XHR对象
+			var request = new XMLHttpRequest();
+			request.open('GET',url);
+			request.responseType = "blob";
+			// when the request loads check whether it was successful
+			request.onload = function(){
+				if(request.status===200){
+					resolve(request.response);
+				}else{
+					reject(Error("Image didn\'t load successfully; error code: "+request.statusText));
+				}
+			};
+			request.onerror = function(){
+				reject(Error("There was a network error"));
+			};
+			// send the request
+			request.send();  
+		});
+	}
+	var body = document.querySelector('body');
+	var myImage = new Image();
+	imgLoad("promise.png").then(function(response){
+		var imageURL = window.URL.createObjectURL(response);
+		myImage.src = imageURL;
+		body.append(myImage);
+	},function(Error){
+		console.log(Error);
+	});
+</script>	
+</body>
+</html>
