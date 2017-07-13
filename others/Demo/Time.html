@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>简易时钟</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+<style>
+	#time{
+		width:220px;
+		margin: 10px auto;
+	}	
+</style>
+<script>
+	window.onload = function(){
+		var oTime = document.getElementById('time');
+		var aSpan = oTime.getElementsByTagName('span');
+
+		function getTimes(){
+			var oDate= new Date();
+			var aDate = [oDate.getFullYear(),(oDate.getUTCMonth()+1),oDate.getUTCDate(),oDate.getHours(),oDate.getMinutes(),oDate.getSeconds()];
+			for(i in aDate){
+				aSpan[i].innerHTML = format(aDate[i]);
+			}
+		}
+
+		function format(a){
+			return a.toString().replace(/^(\d)$/,"0$1");
+		}
+		setInterval(getTimes,1000);
+		getTimes();
+	}
+</script>
+</head>
+
+<body>
+    <div id="time">
+    	<span></span>年<span></span>月<span></span>日<span></span>点<span></span>分<span></span>秒
+    </div>
+</body>
+</html>

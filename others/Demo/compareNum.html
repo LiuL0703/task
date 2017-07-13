@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>parseInt求和</title>
+	<style>
+		body,p{
+			margin: 0;
+			padding: 0;
+			font-family:inherit
+		}
+		p{
+			width: 280px;
+			margin: 10px auto;
+		}
+		input{
+			width: 50px;
+			height: 20px;
+			margin:0 10px;
+			background: #f0f0f0;
+			border: 1px solid #ccc;
+		}
+		span{
+			width: 30px;
+			margin-right: 10px
+		}
+	</style>
+	<script>
+		window.onload = function(){
+			var  oInput = document.getElementsByTagName('input');
+			var oSpan = document.getElementsByTagName('span')[0];
+			var oBtn = document.getElementsByTagName('button')[0];
+			for (var i = 0; i < oInput.length; i++){
+				oInput[i].onkeyup = function (){
+					this.value = this.value.replace(/[^\d]/,"")
+				}	
+			}
+			
+			oBtn.onclick = function(){
+				(oInput[0].value === ''&&oInput[1].value==='')?
+				alert("请输入数字"):
+				(oSpan.innerHTML = Math.max(oInput[0].value,oInput[1].value));
+			}
+
+		}
+	</script>
+</head>
+<body>
+	<p><input type="text">vs<input type="text"><button>最大数是</button> <span>？</span></p>
+</body>
+</html>

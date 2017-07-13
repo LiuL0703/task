@@ -1,0 +1,23 @@
+@charset "UTF-8";
+/**
+ * 
+ * @authors Your Name (you@example.org)
+ * @date    2016-10-11 18:03:59
+ * @version $Id$
+ */
+body{
+	background: #A3C5A8;
+}
+#nav {
+	background: green;
+}
+#green{
+	border-color: green;
+}
+#red{
+	background: red;
+	border-color: red;
+}
+#black{
+	background: black;
+}

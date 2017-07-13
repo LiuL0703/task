@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>Examples</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+</head>
+<style>
+body{
+	color: #fff;
+}
+#div{
+	width: 160px;
+	height: 160px;
+	border:10px solid #000;
+	font:12px/1.5 Tahoma;
+	text-align: center;
+	padding: 10px;
+	background: black;
+	font-style: #fff;
+	
+	margin: 0 auto;
+}
+#div.hover{
+	background: #ccc;
+	color: red;
+	border-color: red;
+}
+</style>
+<script>
+window.onload = function(){
+	var oDiv = document.getElementById('div');
+	oDiv.onmouseover = function(){
+		oDiv.className = 'hover';
+
+	}
+	oDiv.onmouseout = function(){
+		oDiv.className = '';
+	}
+}
+	
+</script>
+<body>
+    <div id="div">
+      鼠标移入改变样式，鼠标移出恢复。
+    </div>
+</body>
+</html>

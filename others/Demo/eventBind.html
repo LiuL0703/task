@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>Examples</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+<style>
+	pre{
+		color:green;
+		padding:10px 15px;
+		background:#f0f0f0;
+		border:1px dotted #333;
+		font:12px/1.5 Courier New;
+	}
+	span{
+		color:#999;
+	}
+</style>
+<script>
+	var EventUtil = {
+		addHandler: function (oElement, sEvent, fnHandler) {
+			oElement.addEventListener ? oElement.addEventListener(sEvent, fnHandler, false) : oElement.attachEvent("on" + sEvent, fnHandler)	
+		},
+		removeHandler: function (oElement, sEvent, fnHandler) {
+			oElement.removeEventListener ? oElement.removeEventListener(sEvent, fnHandler, false) : oElement.detachEvent("on" + sEvent, fnHandler)
+		},
+		addLoadHandler: function (fnHandler) {
+			this.addHandler(window, "load", fnHandler)
+		}
+	};
+
+
+
+		EventUtil.addLoadHandler(function(){
+			var  aBtn = document.getElementsByTagName('input');
+
+			EventUtil.addHandler(aBtn[1],"click",function(){
+				EventUtil.addHandler(aBtn[0],"click",fnHandler);
+				aBtn[0].value = "我可以点击了";
+			});
+			EventUtil.addHandler(aBtn[2],"click",function(){
+				EventUtil.removeHandler(aBtn[0],"click",fnHandler);
+				aBtn[0].value = "无用的按钮";
+			});
+			function fnHandler(){
+				alert("绑定成功！")	
+			}
+		});
+		
+</script>
+</head>
+<body>
+    <pre>
+		&lt;script type="text/javascript"&gt;
+		var EventUtil = {
+			addHandler: function (oElement, sEvent, fnHandler) {
+				oElement.addEventListener ? oElement.addEventListener(sEvent, fnHandler, false) : oElement.attachEvent("on" + sEvent, fnHandler)	
+			},
+			removeHandler: function (oElement, sEvent, fnHandler) {
+				oElement.removeEventListener ? oElement.removeEventListener(sEvent, fnHandler, false) : oElement.detachEvent("on" + sEvent, fnHandler)
+			},
+			addLoadHandler: function (fnHandler) {
+				this.addHandler(window, "load", fnHandler)
+			}
+		}
+		&lt;/script&gt;
+	</pre>
+<center><input type="button" value="毫无用处的按钮"> <input type="button" value="绑定click"> <input type="button" value="解除绑定"></center>
+
+</body>
+</html>

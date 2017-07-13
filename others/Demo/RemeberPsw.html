@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>Examples</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+</head>
+<style>
+body,div,input{
+	padding: 0;
+	margin: 0;
+}
+body{
+	font:12px/1.5 Tahoma;
+}
+input{
+	margin-right: 5px;
+	vertical-align:middle;
+}
+	#tips{
+		margin-top: 4px;
+		background: #ffefa4;
+		padding: 4px; 
+		border: 1px solid #f90;
+		display: none;
+	}
+	#outer{
+		width: 200px;
+		margin:10px auto;  
+	}
+</style>
+<script>
+	window.onload = function(){
+		var oTip = document.getElementById('tips');
+		var oLab = document.getElementsByTagName('label')[0];
+
+		oLab.onmouseover = function(){
+			oTip.style.display = 'block';
+		}
+		oLab.onmouseout= function(){
+			oTip.style.display = 'none';
+		}
+	}
+</script>
+<body>
+<div id="outer">
+	<label><input type="checkbox">两周内自动登录</label>
+	<div id="tips">
+	为了您的信息安全，请不要在网吧或公用电脑上使用此功能！	
+	</div>  
+</div>
+</body>
+</html>

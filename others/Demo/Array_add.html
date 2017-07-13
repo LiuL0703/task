@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>Examples</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+</head>
+<style>
+	#outer{
+		color:#999;font:12px/1.5 Tahoma;
+		margin: 2px auto;
+		width: 500px;
+	}
+	#outer label span{
+		padding-left: 6px;
+	}
+	#outer label input{
+		padding: 3px;
+		font-family: inherit;
+		width: 200px;
+		margin-right: 16px;
+	}
+	#sum {
+		color: red;
+		font-size: 30px;
+	}
+</style>
+<script>
+	window.onload = function(){
+		var oBtn=document.getElementById('button');
+		var oValue = document.getElementsByTagName('input')[0];
+		var oShow = document.getElementById('sum');
+		oValue.onkeyup = function(){
+			this.value = this.value.replace(/[^(\d)|(,)$]/,"");
+		}
+		oBtn.onclick =  function(){
+			var oInput = oValue.value.split(',')
+			var sum = 0;
+			for(var i in oInput){
+				sum += parseInt(oInput[i]);
+			}
+			oShow.innerHTML = sum;
+		}
+	}
+</script>
+<body>
+    <div id="outer">
+    	<label for=""><input type="text"value="1,2,3,4,5,6,7,8,9,10"><span>输入数字求和，数字之间用","号分隔</span></label>
+    	<p><button id="button">求和</button></p>
+    	<strong id="sum"></strong>
+    </div>
+</body>
+</html>

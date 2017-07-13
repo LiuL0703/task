@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>JavaScript作用域原理</title>
+</head>
+<body>
+	<script>
+	function factory() {
+          var name = 'laruence';
+          var intro = function(){
+               alert('I am ' + name);
+          }
+          return intro;
+     }
+ 
+     function app(para){
+          var name = para;
+          var func = factory();
+          func();
+     }
+      
+     app('eve');
+     /*
+      * 在刚进入app函数体时, app的活动对象有一个arguments属性, 俩个值为undefined的属性: name和func. * 和一个值为’eve’的属性para; 此时的scope chain如下:
+      * [[scope chain]] = [
+      *  {
+      *        para: 'eve',
+      *        name: undefined,
+      *        func: undefined,
+      *        argument:[]
+      *  },{
+      *       window call object
+      *  }
+      * ]
+      *
+      * 当调用进入factory的函数体的时候, 此时的factory的scope chain为:
+      * [[scope chain]] = [
+      * {
+      *      name : undefined,
+      *      intro : undefined
+      * },{
+      *      window call object
+      * }
+      * ]
+      * 此时的作用域链中, 并不包含app的活动对象.
+      *
+      * 在定义intro函数的时候, intro函数的[[scope]]为:
+      * [[scope chain]] = [
+      * {
+      *      name : 'laruence',
+      *      intro : undefined
+      * },{
+      *      window call object
+      * }
+      * ]
+      *
+      * 从factory函数返回以后,在app体内调用intor的时候, 发生了标识符解析, 而此时的sope chain是:
+      *[[scope chain]] = [
+      *{
+      *   intro call object
+      *},{
+      *   name :'laruence',
+      *   intro : undefined
+      *},{
+      *   window call object
+      *}
+      *]
+      * 因为scope chain中,并不包含factory活动对象. 所以, name标识符解析的结果应该是factory活动对象中的name属性, 也就是’laruence’
+      *
+      *
+      * 所以运行结果为:  I am laruence
+      */
+	</script>
+</body>
+</html>

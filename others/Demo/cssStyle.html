@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>CSS函数</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+<style>
+	#outer{
+		width:400px;
+		height:200px;
+		border:1px solid #f60;
+		background:#fef4eb;
+		margin:10px auto;
+	}
+	button{
+		border:0;
+		color:#fff;
+		cursor:pointer;
+		font-weight:700;
+		background:#f60;
+		padding:2px;
+		margin:10px 0 0 10px;
+	}
+</style>
+<script>
+	window.onload = function(){
+		var aBtn = document.getElementsByTagName('button');
+		var oBox = document.getElementById('outer');
+
+		function css(obj,attr,value){
+			switch(arguments.length) {
+				//两个参数 
+				case 2:
+					//第二个参数为objec时 批量设置属性
+					if(typeof arguments[1] ==="object"){
+						for(var i in attr){
+							obj.style[i] = attr[i];
+						}			
+					}
+					//因为elem.style.width只能获取elem的style属性里的样式，
+					//无法获取外部css文件中定义的样式，所以针对IE8以下以及其他浏览器，
+					//需要以这两种不同的方式获取外部css样式，
+					//即currentStyle[仅限IE]和 getComputedStyle。
+					else{	
+						return obj.currentStyle ? obj.currentStyle[attr]:getComputedStyle(obj,null)[attr];
+					}
+					break;
+				case 3:
+					obj.style[attr] = value;
+					break;
+				default:
+					alert("TypeError");
+			}
+		}
+
+
+
+		aBtn[0].onclick = function(){
+			alert("width: "+css(oBox,"width")+"\nheight: "+css(oBox,"height")+"\nbackground-color: "+css(oBox,"backgroundColor"));
+		}
+		aBtn[1].onclick = function(){
+			css(oBox,{width:"330px",height:'100px',borderColor:"#0084ff",backgroundColor:'#eff8ff'});
+			for(var i =0;i<aBtn.length;i++){
+				css(aBtn[i],"backgroundColor","#0084ff");
+			}
+		}
+		aBtn[2].onclick = function(){
+			css(oBox,{width:"400px",height:'200px',borderColor:"#f60",backgroundColor:'#fef4eb'});
+			for(var i =0;i<aBtn.length;i++){
+				css(aBtn[i],"backgroundColor","#f60");
+			}
+		}
+
+	}
+</script>
+</head>
+<body>
+    <div id="outer">
+    	<button>Get Style</button>
+    	<button>Set Style</button>
+    	<button>Default Style</button>
+    </div>
+</body>
+</html>

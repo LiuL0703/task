@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>Show-KeyCode</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+<style>
+	body{
+	text-align:center;
+	font:30px/1.5 \5fae\8f6f\96c5\9ed1, arial;	
+}
+</style>
+</head>
+<script>
+	window.onload = function(){
+		oP = document.getElementsByTagName('p')[0];
+
+		document.onkeydown = function(e){
+			var event = e||window.event;
+			oP.innerHTML = event.keyCode;
+			return false;
+		}
+	}
+</script>
+<body>
+    <p></p>
+</body>
+</html>

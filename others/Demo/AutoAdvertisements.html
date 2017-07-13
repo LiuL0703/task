@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>轮播广告</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+<style>
+	body,div,ul,li{
+		padding:0;
+		margin:0;
+	}
+	ul{
+		list-style: none;
+	}
+	body{
+		text-align: center;
+		font:12px/20px Arial;
+		background:#000;
+	}
+	#box{
+		width: 472px;
+		height: 152px;
+		position: relative;
+		margin:10px auto;
+		overflow: hidden;
+		border: 8px solid #fff;
+		border-radius: 5px;
+
+	}
+	.list{
+		position: relative;
+		width: 470px;
+		height: 150px;
+		overflow: hidden;
+		border:1px solid #ccc;
+		background: #fff;
+	}
+	.list li{
+		position:absolute;
+		top:0;
+		left:0;
+		width:470px;
+		height: 150px;
+		opacity: 0;
+		filter: alpha(opacity=0);
+	}
+	.list li.current{
+		opacity:1;
+		filter: alpha(opacity=100);
+	}
+	.count{
+		position: absolute;
+		right: 0;
+		bottom:5px;
+	}
+	.count li{
+		float: left;
+		color:#fff;
+		width: 20px;
+		height: 20px;
+		cursor: pointer;
+		margin-right: 5px;
+		overflow: hidden; 
+		background:#f90;
+		opacity: 0.7;
+		filter: alpha(opacity=70);
+		border-radius: 20px;
+	}
+	.count li.current{
+		color: #fff;
+		opacity: 1;
+		font-weight: 700;
+		background:#f60;
+	}
+</style>
+<script>
+	window.onload= function(){
+		var aUl = document.getElementsByTagName('ul');
+		var oBox = document.getElementById("box");
+		var aNum = aUl[1].getElementsByTagName("li");
+		var aImg = aUl[0].getElementsByTagName("li");
+
+		var timer = null;
+		var play = null;
+		var index = 0;
+
+		for(var i = 0; i<aNum.length;i++){
+			aNum[i].index = i;
+			aNum[i].onmouseover = function(){
+				show(this.index);
+			}
+		}
+		autoPlay();
+		
+		oBox.onmouseover = function(){
+			clearInterval(play);
+		}
+		oBox.onmouseout = function(){
+			autoPlay();
+		}
+		/*
+			index >= aImg.length&&(index=0);
+		*/
+		function autoPlay(){
+			play = setInterval(function(){
+				index++;
+				if(index>=aImg.length){
+					index = 0;
+				}
+				show(index);
+			},2000);
+		}
+
+		//切换图片 淡入淡出
+		function show(a){
+			index = a;
+			var alpha =20;
+			for(var j = 0;j<aNum.length;j++){
+				aNum[j].className = "";
+			}
+			aNum[index].className = "current";
+			clearInterval(timer);
+
+			for(var k = 0;k<aImg.length;k++){
+				aImg[k].style.opacity = 0;
+				//兼容IE
+				aImg[k].style.filter = "alpha(opacity=0)";
+			}			
+			timer = setInterval(function(){
+				alpha +=2;
+				if(alpha >100){
+					alpha = 100;
+				}
+				aImg[index].style.opacity = alpha/100;
+				aImg[index].style.filter = "alpha(opacity = " + alpha + ")";
+				if(alpha === 100){
+					clearInterval(timer);
+				}
+			},20)
+		}
+	}
+</script>
+</head>
+<body>
+    <div id="box">
+    	<ul class="list"> 
+    		<li class="current"><img src="img/ad1.jpg" alt=""></li>
+    		<li><img src="img/ad2.jpg" alt=""></li>
+    		<li><img src="img/ad3.jpg" alt=""></li>
+    		<li><img src="img/ad4.jpg" alt=""></li>
+    		<li><img src="img/ad5.jpg" alt=""></li>
+    	</ul>
+    	<ul class="count">
+    		<li class="current">1</li>
+    		<li>2</li>
+    		<li>3</li>
+    		<li>4</li>
+    		<li>5</li>
+    	</ul>
+    </div>
+</body>
+</html>

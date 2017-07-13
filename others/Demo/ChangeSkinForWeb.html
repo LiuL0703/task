@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>Examples</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="green.css" rel="stylesheet">
+</head>
+<style>
+body,ul,li{
+	margin: 0;
+	padding: 0;
+}
+body{
+	height: 100%;
+	font: 12px/1.5 Tahoma;
+}
+li{
+	list-style-type: none;
+}
+a:link,a:visited{
+	text-decoration: underline;
+}
+#outer{
+	margin: 10px auto;
+	padding: 16px auto;
+	width: 500px;
+
+}
+#skin li{
+	float: left;
+	margin: 0 auto;
+	margin-right: 10px;
+	padding: 0px;
+	width: 6px;
+	height: 6px;
+	border-width: 4px;
+	border-style:solid;
+	overflow: hidden;
+    text-indent: -9999px;
+}
+#skin{
+	display:inline-block; 
+}
+#skin li.current{
+	background: #fff;
+}
+#nav{
+	width: 498px;
+	display:inline-block;
+	margin-top: 6px;
+	padding-bottom: 0;
+	border:1px solid #fff;
+	border-right:none; 
+}
+#nav li{
+	height: 25px;
+	margin:0px auto;
+	padding:0 20px;
+	float: left;
+	border-right: 1px solid #fff;
+	width: 42px;
+	text-align: center;
+}
+#nav li a{
+	color: #fff;
+	text-decoration: none;
+	line-height: 25px;
+}
+
+</style>
+<script>
+
+window.onload = function ()
+{
+	var oSkin = document.getElementById('skin');
+	var aSkin = oSkin.getElementsByTagName('li');
+	var oLink = document.getElementsByTagName("link")[0];
+
+	for(var i=0;i<aSkin.length;i++){
+		aSkin[i].onclick = function(){
+			for(var j in aSkin){
+				aSkin[j].className = '';
+				this.className = 'current';
+				oLink.href = this.id+".css";
+			}
+		}
+	}
+	
+};
+
+</script>
+<body>
+<div id="outer">
+	<ul id="skin">
+    	<li id="red"  title="red">red</li>
+    	<li id="green" class="current" title="green">green</li>
+    	<li id="black" title="black">black</li>
+    </ul>
+    <ul id="nav"> 
+    	<li><a href="#">新闻</a></li>
+    	<li><a href="#">娱乐</a></li>
+    	<li><a href="#">体育</a></li>
+    	<li><a href="#">电影</a></li>
+    	<li><a href="#">音乐</a></li>
+    	<li><a href="#">旅游</a></li>
+    </ul>
+</div>
+    
+</body>
+</html>

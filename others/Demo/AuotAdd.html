@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		body{
+			text-align: center;
+			font:700 30px/1.5 arial;
+		}
+	</style>
+	<script>
+		window.onload = function(){
+			oBody = document.body;
+			var i = 0;
+			setInterval(updataNum,1000);
+			function updataNum(){
+				oBody.innerHTML = ++i;
+			}
+		}
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

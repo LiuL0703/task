@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>弹幕</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+<style>
+	.s_txt {
+	  width: 388px;
+	  height: 34px;
+	  border-radius: 3px;
+	  border: 1px solid rgb(204, 204, 204);
+	  padding-left: 10px;
+	}
+	
+	.s_sub {
+	  border: 1px solid rgb(230, 80, 30);
+	  color: rgb(230, 80, 0);
+	  border-radius: 3px;
+	  text-align: center;
+	  padding: 0;
+	  height: 35px;
+	  line-height: 35px;
+	  font-size: 14px;
+	  width: 159px;
+	  background-color: white;
+	}
+	
+	.s_del {
+	  border: 1px solid rgb(176, 168, 165);
+	  color: rgb(176, 168, 165);
+	  border-radius: 3px;
+	  text-align: center;
+	  padding: 0;
+	  height: 35px;
+	  line-height: 35px;
+	  font-size: 14px;
+	  width: 159px;
+	  background-color: white;
+	}
+	
+	.dm {
+	  margin: 20px;
+	  text-align: center;
+	}
+	
+	.dm_screen {
+	  border: 1px solid rgb(229, 229, 229);
+	}
+	
+	.dm .dm_screen .dm_mask {
+	  width: 100%;
+	  height: 380px;
+	}
+	
+	.dm .dm_screen .dm_show div {
+	  font-size: 22px;
+	  line-height: 36px;
+	  font-weight: 500;
+	  color: #fff;
+	  position: absolute;
+	  left: 0;
+	  top: 0;
+	}
+</style>
+<script src="jquery-3.1.0.js"></script>
+<script>
+		$(function(){
+		  var ref = new Wilddog("https://dammulianxi.wilddogio.com/messages");
+		  var arr = [];
+		  //把数据提交到野狗云
+		  $(".s_sub").click(function() {
+		    var text = $(".s_txt").val();
+		    ref.child('message').push(text);
+		    $(".s_txt").val('');
+		  });
+		  //响应按键点击事件
+		  $(".s_txt").keypress(function(event) {
+		    if (event.keyCode == "13") {
+		      $(".s_sub").trigger('click');
+		    }
+		  });
+		  //响应按键清除事件
+		  $(".s_del").click(function() {
+		    ref.remove();
+		    arr = [];
+		    $('.dm_show').empty();
+		  });
+		  //监听云端数据变更，云端数据变化，弹幕框里数据也跟着变化。
+		  ref.child('message').on('child_added', function(snapshot) {
+		    var text = snapshot.val();
+		    arr.push(text);
+		    var textObj = $("<div class=\"dm_message\"></div>");
+		    textObj.text(text);
+		    $(".dm_show").append(textObj);
+		    moveObj(textObj);
+		  });
+
+		  ref.on('child_removed', function() {
+		    arr = [];
+		    $('.dm_show').empty();
+		  });
+		  //按照时间规则显示弹幕内容。	
+		  var topMin = $('.dm_mask').offset().top;
+		  var topMax = topMin + $('.dm_mask').height();
+		  var _top = topMin;
+
+		  var moveObj = function(obj) {
+		    var _left = $('.dm_mask').width() - obj.width();
+		    _top = _top + 50;
+		    if (_top > (topMax - 50)) {
+		      _top = topMin;
+		    }
+		    obj.css({
+		      left: _left,
+		      top: _top,
+		      color: getRandomColor()
+		    });
+		    var time = 20000 + 10000 * Math.random();
+		    obj.animate({
+		      left: "-" + _left + "px"
+		    }, time, function() {
+		      obj.remove();
+		    });
+		  }
+
+		  var getRandomColor = function() {
+		    return '#' + (function(h) {
+		      return new Array(7 - h.length).join("0") + h
+		    })((Math.random() * 0x1000000 << 0).toString(16))
+		  }
+
+		  var getAndRun = function() {
+		    if (arr.length > 0) {
+		      var n = Math.floor(Math.random() * arr.length + 1) - 1;
+		      var textObj = $("<div>" + arr[n] + "</div>");
+		      $(".dm_show").append(textObj);
+		      moveObj(textObj);
+		    }
+
+		    setTimeout(getAndRun, 3000);
+		  }
+
+		  jQuery.fx.interval = 50;
+		  getAndRun();
+	});
+	</script>
+<script src="https://cdn.wilddog.com/js/client/current/wilddog.js"></script>
+</head>
+<body>
+    <div class="dm">
+  		<div class="dm_screen">
+		    <div class="dm_mask"></div>
+		    <div class="dm_show">
+	      <!-- <div>text message</div>  -->
+	    	</div>
+  		</div>
+	  <div class="send">
+	    <div class="s_fiter">
+	      <div class="s_con">
+	        <p>
+	          <input placeholder="说点什么?" class="s_txt" type="text" />
+	        </p>
+		    <p>
+	          <input type="button" value="发 射" class="s_sub" />
+	          <input type="button" value="清 屏" class="s_del" />
+	       	</p>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+
+	
+</body>
+</html>

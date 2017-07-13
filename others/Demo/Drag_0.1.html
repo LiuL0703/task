@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>拖拽</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+<style>
+	body,div{
+		margin:0;
+		padding:0;
+	}
+	body{
+		background:#3e3e3e;
+	}
+	div{
+		position: absolute;
+		width: 100px;
+		height: 100px;
+		border:1px solid #888;
+		cursor: move;
+		background: black;
+	}
+	#drag1{
+		top: 100px;
+		left: 100px;
+	}
+	#drag2{
+		top: 100px;
+		left: 300px;
+	}
+	#temp {
+		opacity: 0.3;
+		filter: alpha(opacity=30);
+	}
+</style>
+<script>
+	var zIndex = 1;
+	window.onload = function(){
+		var oDrag1 = document.getElementById('drag1');
+		var oDrag2 = document.getElementById('drag2');
+		drag(oDrag1);
+		drag(oDrag2);
+	};
+	function drag(Drag){
+		var disX = disY = 0;
+		Drag.onmousedown = function(e){
+			var event = e||window.event;
+			// 确定当前鼠标所在矩形的坐标
+			disX = event.clientX - this.offsetLeft;
+			disY = event.clientY - this.offsetTop;
+
+			
+			var oTemp = document.createElement('div');
+			oTemp["id"] = 'temp';
+			oTemp.style.left = this.currentStyle ? this.currentStyle['left']:getComputedStyle(this,null)['left'];
+			oTemp.style.top = this.currentStyle ? this.currentStyle['top']:getComputedStyle(this,null)['top'];
+			oTemp.style.zIndex++;
+			
+			document.body.appendChild(oTemp);
+
+			document.onmousemove = function(e){
+				var event = e||window.event;
+				var iL = event.clientX - disX;
+				var iT = event.clientY - disY;
+				var maxL = document.documentElement.clientWidth - Drag.offsetWidth;
+				var maxT = document.documentElement.clientHeight - Drag.offsetHeight;
+				iL<=0 && (iL=0);
+				iT<=0 && (iT=0);
+				iL>=maxL&&(iL=maxL);
+				iT>=maxT&&(iT=maxT);
+
+				oTemp.style.left = iL+"px";
+				oTemp.style.top = iT+"px";
+				return false;
+			};
+			document.onmouseup = function(e){
+				document.onmousemove = null;
+				document.onmouseup = null;
+				Drag.style.left = oTemp.style.left;
+				Drag.style.top = oTemp.style.top;
+				Drag.style.zIndex = oTemp.style.zIndex;
+				document.body.removeChild(oTemp);
+				Drag.releaseCapture && Drag.releaseCapture();
+			};
+			this.setCapture && this.setCapture();
+			return false;
+		}
+	}
+</script>
+</head>
+<body>
+    <div id="drag1"></div>
+    <div id="drag2"></div>
+</body>
+</html>

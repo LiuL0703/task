@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>Examples</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+<style>
+	.box{
+    float:left;
+    position:relative;
+    left:50%;
+}
+p{
+    float:left;
+    position:relative;
+    right:50%;
+}
+</style>
+</head>
+<body>
+   <div class="box">
+    <p>我是浮动的</p>
+    <p>我也是居中的</p>
+</div>
+  
+</body>
+</html>
+<!-- 1. 把margin设为auto
+
+具体来说就是把要居中的元素的margin-left和margin-right都设为auto，此方法只能进行水平的居中，且对浮动元素或绝对定位元素无效。
+2、使用 text-align:center
+只能对图片，按钮，文字等行内元素(display为inline或inline-block等)进行水平居中。但要说明的是在IE6、7这两个奇葩的浏览器中，它是能对任何元素进行水平居中的。
+
+3、使用line-height让单行的文字垂直居中
+
+4 把文字的line-height设为文字父容器的高度，适用于只有一行文字的情况。
+
+5 使用display:table-cell来居中
+对于那些不是表格的元素，我们可以通过display:table-cell 来把它模拟成一个表格单元格，这样就可以利用表格那很方便的居中特性了。
+但是，这种方法只能在IE8+、谷歌、火狐等浏览器上使用，IE6、IE7都无效。
+
+6、使用绝对定位来进行居中
+
+此法只适用于那些我们已经知道它们的宽度或高度的元素。
+绝对定位进行居中的原理是通过把这个绝对定位元素的left或top的属性设为50%,这个时候元素并不是居中的，而是比居中的位置向右或向左偏了这个元素宽度或高度的一半的距离，所以需要使用一个负的margin-left或margin-top的值来把它拉回到居中的位置，这个负的margin值就取元素宽度或高度的一半。 -->

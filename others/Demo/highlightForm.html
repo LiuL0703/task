@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>当前输入框高亮</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+<style>
+body,form,h2,p,input{
+	margin:0;
+	padding:0;
+}
+body{
+	color:#4f4f4f;
+	font:14px/1.5 \5fae\8f6f\96c5\9ed1;
+}
+form{
+	width:400px;
+	background:#fef4eb;
+	border:2px solid #f60;
+	padding-bottom:10px;
+	overflow:hidden;
+	zoom:1;
+	margin:10px auto;
+}
+form h2{
+	color:#fe791e;
+	font-size:16px;
+	background:#ffebd7;
+	border-bottom:2px solid #f60;
+	padding:5px 10px;
+}
+form p{
+	float:left;
+	clear:both;
+	width:100%;
+	height:31px;
+	margin-top:10px;
+	line-height:31px;
+}
+form label,form input{
+	float:left;
+}
+form label{
+	width:100px;
+	height:31px;
+	text-align:right;
+}
+form input{
+	border:0;
+	font-family:\5fae\8f6f\96c5\9ed1;
+	background:url(img/input.png) no-repeat;
+}
+form .f-text,form .f-text-high{
+	width:203px;
+	height:31px;
+	padding-left:5px;
+	line-height:31px;
+}
+form .f-text-high{
+	background-position:0 -31px;
+}
+form .f-btn{
+	color:#fff;
+	width:104px;
+	height:31px;
+	cursor:pointer;
+	font-size:16px;
+	background:#f60;
+	line-height:31px;
+	border-radius:5px;
+}
+</style>
+<script>
+	window.onload= function(){
+		var aInput = document.getElementsByTagName('input');
+		for(var i=0;i<aInput.length;i++){
+			aInput[i].onfocus = function(){
+				this.className = "f-text-high";
+			}
+			aInput[i].onblur = function(){
+				this.className = "f-text";
+			}
+		}
+	}
+
+</script>
+</head>
+<body>
+    <form>
+    	<h2>用户登录</h2>
+    	<p><label for="">用户名：</label><input class="f-text" type="text"/></p>
+    	<p><label for="">密码：</label><input class="f-text" type="password"/></p>
+    	<p><label></label><input class="f-btn" type="button" value="登 录" /></p>
+    </form>
+</body>
+</html>

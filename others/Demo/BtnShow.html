@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>单一按钮显示/隐藏</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+</head>
+<style>
+body,h2,ul,li{
+    margin: 0;
+    padding:0;
+}
+body{
+    font:12px/1.5 Tahoma;
+}
+
+	#outer{
+		width: 200px;
+        border: 1px solid #aaa;
+        margin: 10px auto;
+    }
+    #outer ul li{
+        list-style: none;
+        
+    }
+    #outer ul{
+        border-top:1px solid #DEE3E6;
+    }
+    #outer li{height:25px;line-height:25px;vertical-align:top;}
+    #outer h2{
+        cursor: pointer;
+        color:#57646E;
+        font-size:14px;
+        font-weight:400;
+        border:1px solid #e9edf2;
+        height:30px;
+        line-height:30px;
+        padding-left:10px;
+        background:#ced3d7 url(img/ico.gif) 180px 15px no-repeat;
+        border-color:#fff;
+    }
+    #outer h2.open{
+        background-position:180px -12px;
+    }
+    #outer a:hover{
+        background:#fff;
+        text-decoration:underline;
+    }
+    #outer a{
+        display: block;
+        color: #6b7980;
+        background: #e9edf2;
+        text-decoration: none;
+        padding: 0 10px;
+    }
+</style>
+<script>
+    window.onload = function(){
+        var oH2 = document.getElementById('outer').getElementsByTagName('h2')[0];
+        var oUl = document.getElementById('outer').getElementsByTagName('ul')[0];
+
+        oH2.onclick = function(){
+        oUl.style.display = oUl.style.display == 'none'? 'block':'none';
+        oH2.className =  oH2.className == 'open'? '':'open';
+        } 
+    }
+</script>
+<body>
+    <div id="outer">
+    <h2>播放列表...</h2>
+    <ul>
+        <li><a href="javascript:;">玩家之徒 - 蔡依林</a></li>
+        <li><a href="javascript:;">原谅我就是这样的女生 - 戴佩妮</a></li>
+        <li><a href="javascript:;">猜不透 - 丁当</a></li>
+        <li><a href="javascript:;">自导自演 - 周杰伦</a></li>
+        <li><a href="javascript:;">浪漫窝 - 弦子</a></li>
+        <li><a href="javascript:;">流年 - 王菲</a></li>
+    </ul>
+</div>
+</body>
+</html>

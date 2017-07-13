@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>改变DIV的CSS</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+</head>
+<style>
+body{
+	font-size: 12px;
+}
+#outer{
+	width: 200px;
+	margin: 0 auto;
+}
+label{
+	display: block;
+	margin: 10px auto;
+	width: 400px;
+    
+}	
+input{
+	padding: 4px;
+}
+button{
+	margin-right:6px;
+}
+#div{
+	  width: 180px;
+	  height: 180px;
+	  border: 1px solid #ccc;
+	  margin: 10px auto;
+	  background: #000;
+	  color: #fff;
+	  padding:10px;
+}
+p{
+	margin:0px 50px;
+}
+</style>
+<script>
+	function changeStyle(ele,name,value){
+		ele.style[name] = value;
+	}
+	window.onload = function(){
+		var oBtn_con = document.getElementById('confirm');
+		var oBth_res = document.getElementById('reset');
+		var oDiv = document.getElementById('div');
+		var oName_val = document.getElementById('name');
+		var oValue = document.getElementById('value');
+
+		oBtn_con.onclick = function(){
+			changeStyle(oDiv,oName_val.value,oValue.value);
+		}
+		oBth_res.onclick = function(){
+			
+			oDiv.removeAttribute("style");
+		}
+	}
+</script>
+<body>
+	<div id="outer">
+	<label for=""><span>属性名：</span><input id="name" type="text" value="background"></label>
+	<label for=""><span>属性值：</span><input id="value" type="text" value="blue"></label>
+    <p><button id="confirm">确定</button><button id="reset">重置</button></p>
+	</div>
+	<div id="div">在上方输入框输入"属性名"及"属性值"，点击确定按钮查看效果。</div>
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>简易选项卡</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+</head>
+<style>
+	body,div,ul,li{
+		padding: 0;
+		margin: 0;
+	}
+	body{
+		font: 12px/1.5 Tahoma; 
+	}
+	#outer{
+	 	width: 450px;
+	 	margin: 10px auto;
+	 }
+	 #nav{
+	 	overflow: hidden;
+	 	background: #000;
+	 	border:1px solid #000;
+	 }
+	#nav li.current{
+		color: #000;
+		background: #ccc;
+	}
+	#nav li{
+		float: left;
+		display: block;
+		list-style: none;
+		padding:0 10px;
+		line-height: 30px;
+		height:30px;
+		cursor:pointer;
+		color: #fff;
+	}
+	#content ul{
+		padding:10px 0;
+		line-height:25px;
+		display: none;
+		margin:0 30px;
+	}
+	#content{
+		border:1px solid #000;
+		border-top-width:0;
+	}
+</style>
+<script>
+	window.onload = function(){
+		var aNav = document.getElementById('nav').getElementsByTagName('li');
+		var aCont = document.getElementById('content').getElementsByTagName('ul');
+
+		for(var i = 0;i<aNav.length;i++){
+			aNav[i].index = i;
+			aNav[i].onmouseover = function(){
+				for(var j=0;j<aNav.length;j++){
+					aNav[j].className = '';
+				}
+				this.className = 'current';
+				for(var j =0;j<aCont.length;j++){
+					aCont[j].style.display = 'none';
+				}
+				aCont[this.index].style.display = 'block';
+			}
+		}
+	};
+</script>
+<body>
+	<div id="outer">
+		<ul id="nav">
+	    	<li>第一课</li>
+	    	<li>第二课</li>
+	    	<li>第三课</li>
+    	</ul>
+	    <div id="content">
+    		<ul style="display:block;">
+    			<li>1</li>
+    			<li>2</li>
+    			<li>3</li>
+    		</ul>
+    	
+    		<ul>
+    			<li>11</li>
+    			<li>22</li>
+    			<li>33</li>
+    		</ul>
+    		<ul>
+    			<li>111</li>
+    			<li>222</li>
+    			<li>333</li>
+    		</ul>
+	    </div>
+	</div> 
+</body>
+</html>

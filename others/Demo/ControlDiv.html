@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+</head>
+<style>
+	#outer{
+		text-align: center;
+	}
+	#div1{
+		width: 100px;
+		height: 100px;
+		background: black;
+		display: block;
+		margin: 10px auto;
+	}
+</style>
+<script>
+	var changeStyle = function(ele,attr,value){
+		ele.style[attr] = value;
+	}; 
+	window.onload = function(){
+		var aBtn = document.getElementsByTagName('button');
+		var oDiv = document.getElementById('div1');
+		var aAttr = ['width','height','background','display','display'];
+		var aValue = ['200px','200px','red','none','block'];
+
+		for(var i = 0;i<aBtn.length;i++){
+			aBtn[i].index = i;
+			aBtn[i].onclick = function(){
+				
+				//this.index == aBtn.length-1 && (oDiv.style.cssText = '');
+				console.log(this.index == aBtn.length-1 && (oDiv.style.cssText = ''));
+				changeStyle(oDiv,aAttr[this.index],aValue[this.index]);
+			};
+			
+		}
+	};
+</script>
+<body>
+	<div id="outer">
+		<button id="Width">变宽</button>
+		<button id="Height">变高</button>
+		<button id="Color">变色</button>
+		<button id="Hidden">隐藏</button>
+		<button id="Reset">重置</button>
+	</div>
+	<div id="div1">	</div>
+</body>
+</html>
